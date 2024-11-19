@@ -12,8 +12,7 @@ class NoticiaRepositoryImpl(private val api: NoticiasAPI) : NoticiaRepository {
     }
 
     override suspend fun getNoticiaDetail(noticiaId: String): NoticiaDetail {
-        // Chama o API e mapeia os dados para NoticiaDetail
-        val response = api.getNoticiaDetail(noticiaId) // ResponseApiDetail
-        return response.data.toNoticiaDetail() // Transforma o DTO para o modelo de domínio
+
+        return api.getNoticiaDetail().data.toNoticiaDetail()
     }
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noticiasapi.app.data.remote.api.RetrofitInstance
 import com.example.noticiasapi.app.data.remote.repository.NoticiaRepositoryImpl
-import com.example.noticiasapi.app.data.repository.NoticiaRepositoryImpl
 import com.example.noticiasapi.app.domain.model.Noticia
 import com.example.noticiasapi.app.domain.model.NoticiaDetail
 import com.example.noticiasapi.app.domain.use_case.GetNoticiasDetailUseCase
@@ -39,13 +38,13 @@ class NoticiaDetailViewModel : ViewModel() {
 
     val noticiaDetail = MutableStateFlow<NoticiaDetail?>(null)
 
-    fun fetchNoticias()
+    fun fetchNoticias(noticiaId: String)
     {
         viewModelScope.launch {
             try {
-                noticiaDetail.value = getNoticiasDetailUseCase()
+                noticiaDetail.value = getNoticiasDetailUseCase(noticiaId)
             } catch (e: Exception) {
-                noticiaDetail.value = emptyList()
+                noticiaDetail.value = null
             }
         }
     }

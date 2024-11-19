@@ -22,25 +22,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MainScreen()
-                    )
-                }
-            }
+            // MainScreen()
+            /*
+            println("")
+            */
         }
     }
 }
 
 @Composable
 fun MainScreen() {
-    var selectedNoticiaId by remember { mutableStateOf<String?>(null) }
-
-    if (selectedNoticiaId == null) {
-        val NoticiaListViewModel: NoticiaListViewModel = viewModel()
-        NoticiaListScreen(NoticiaListViewModel) { NoticiaId ->
-            selectedNoticiaId = NoticiaId
-        }
-    } else {
-        val NoticiaDetailViewModel: NoticiaListViewModel = viewModel()
-        NoticiaD
-    }
+    /*
+    println("")
+    */
 }
