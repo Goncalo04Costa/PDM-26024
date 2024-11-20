@@ -5,6 +5,8 @@ import com.example.noticiasapi.app.data.remote.model.NoticiaDto
 import com.example.noticiasapi.app.domain.use_case.GetNoticiasUseCase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 object  RetrofitInstance{
     val api: NoticiasAPI by lazy {
@@ -15,6 +17,14 @@ object  RetrofitInstance{
             .create(NoticiasAPI::class.java)
 
     }
+}
+
+interface NoticiasAPI {
+ @GET("v1/noticias")
+ suspend fun getNoticias(): List<NoticiaDto>
+
+ @GET("v1/noticias/{id}")
+ suspend fun  getNoticiasDetail(@Path("id") noticiaId: String): NoticiaDetailDto
 }
 
 

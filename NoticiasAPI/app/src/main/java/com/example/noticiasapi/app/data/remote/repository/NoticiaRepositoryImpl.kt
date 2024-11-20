@@ -8,11 +8,11 @@ import com.example.noticiasapi.app.domain.repository.NoticiaRepository
 class NoticiaRepositoryImpl(private val api: NoticiasAPI) : NoticiaRepository {
 
     override suspend fun getNoticias(): List<Noticia> {
-        return api.getNoticias().data.map { it.toNoticia() }
+        return api.getNoticias().map { it.toNoticia() }
     }
 
     override suspend fun getNoticiaDetail(noticiaId: String): NoticiaDetail {
 
-        return api.getNoticiaDetail().data.toNoticiaDetail()
+        return api.getNoticiasDetail(noticiaId).toNoticiaDetail()
     }
 }
