@@ -23,8 +23,9 @@ interface NoticiasAPI {
  @GET("v1/noticias")
  suspend fun getNoticias(): List<NoticiaDto>
 
- @GET("v1/noticias/{id}")
+ @GET("PJW3VC4qQmPAquZfz6pDwytcmun5F9b5SgLhlWZY")
  suspend fun  getNoticiasDetail(@Path("id") noticiaId: String): NoticiaDetailDto
+
 }
 
 
