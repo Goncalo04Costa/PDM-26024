@@ -1,30 +1,20 @@
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.example.loja.view.RegistroScreen
 
-@Composable
-fun MainScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "Bem-vindo ao sistema de Loja!", modifier = Modifier.padding(bottom = 16.dp))
-
-        Button(
-            onClick = {
-                // Contexto correto para iniciar a LoginActivity
-                val context = LocalContext.current
-                val intent = Intent(context, LoginActivity::class.java)
-                context.startActivity(intent)
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Ir para Login")
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val registroViewModel: RegistoViewModel = RegistoViewModel()
+            RegistroScreen(viewModel = registroViewModel)
         }
     }
 }
