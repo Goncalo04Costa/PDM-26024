@@ -7,10 +7,8 @@ class Produto(
     var quantidade: Int
 ) {
 
-    // Construtor secundário com valores padrão
     constructor(nome: String, preco: Int) : this(0, nome, preco, 0)
 
-    // Atualiza o preço do próprio produto
     fun updatePrice(price: Int) {
         if (price >= 0) {
             this.preco = price
