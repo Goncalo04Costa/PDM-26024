@@ -1,13 +1,11 @@
 package com.example.loja.classes
 
-class Utilizador(
-    val id: Int,
-    val nome: String,
+data class Utilizador(
     val email: String,
-    private val pass: String,
-    val carrinho: Carrinho = Carrinho()
-) {
-    fun verificarSenha(senhaInput: String): Boolean {
-        return pass == senhaInput
-    }
+    val password: String,
+    val carrinhoCompras: List<Int>,
+    var uid:String?,
+    val produtos: List<Int>
+){
+    constructor(email: String, password: String) : this(email, password, emptyList(),"", emptyList())
 }

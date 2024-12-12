@@ -65,6 +65,8 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -76,6 +78,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
 
 }

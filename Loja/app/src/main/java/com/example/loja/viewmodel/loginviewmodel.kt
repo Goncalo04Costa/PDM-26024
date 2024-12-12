@@ -1,29 +1,31 @@
 package com.example.loja.viewmodel
 
-import androidx.compose.runtime.mutableStateOf
+
+
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavHostController
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.tasks.await
 
-class LoginViewModel : ViewModel() {
-    var erroMensagem = mutableStateOf("")
-        private set
-
-    private val auth = FirebaseAuth.getInstance()
-
-    fun loginUsuario(email: String, senha: String) {
-        if (email.isBlank() || senha.isBlank()) {
-            erroMensagem.value = "Preencha todos os campos."
-            return
+class LoginViewModel(viewModel: Any, navController: NavHostController) : ViewModel(){
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    suspend fun signIn(email:String, password:String):Boolean{
+        return try{
+            val result = auth.signInWithEmailAndPassword(email,password).await()
+            Log.d("MenuUtilizadorViewModel","Resultado: ${result}")
+            true
         }
-
-        // Autenticação no Firebase
-        auth.signInWithEmailAndPassword(email, senha)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    erroMensagem.value = "Login bem-sucedido!"
-                } else {
-                    erroMensagem.value = "Erro no login: ${task.exception?.message}"
-                }
-            }
+        catch (e:Exception){
+            Log.d("MenuUtilizadorViewModel","Não funcionei excecao:${e}")
+            false
+        }
+    }
+    fun signOut(){
+        try{
+            auth.signOut()
+        }catch(e:Exception){
+            Log.d("MenuUtilizadorViewModel","Não funcionei excecao:${e}")
+        }
     }
 }
