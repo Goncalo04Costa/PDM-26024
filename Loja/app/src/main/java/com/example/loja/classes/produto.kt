@@ -3,7 +3,7 @@ package com.example.loja.classes
 class Produto(
     val id: Int,
     val nome: String,
-    var preco: Int,
+    var preco: Int?,
     var quantidade: Int
 ) {
 

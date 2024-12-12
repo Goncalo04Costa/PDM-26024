@@ -69,7 +69,7 @@ fun AddCarrinho(
             items(listProducts.value) { item ->
                 ProductItemBoxCarrinho(
                     nome = item.nome,
-                    preco = item.preco.toString(),
+                    preco = item.preco,
                     adicionarProduto = { quantity ->
                         val produtoCarrinho = ProdutoCarrinho(item, quantity)
                         listProductsCarrinho.value.add(produtoCarrinho)
@@ -82,8 +82,7 @@ fun AddCarrinho(
                     viewModelCarrinho.viewModelScope.launch {
                         try {
                             isLoading.value = true
-                            // Chama a função para salvar o carrinho no Firestore
-                            val resultCarrinho = viewModelCarrinho.salvarCarrinho(newCarrinho)
+                            val resultCarrinho = viewModelCarrinho.saveCarrinho(newCarrinho)
                             Log.d("AddCarrinhoScreen", "Carrinho adicionado: $resultCarrinho")
                             isLoading.value = false
                         } catch (e: Exception) {
@@ -106,7 +105,7 @@ fun AddCarrinho(
 @Composable
 fun ProductItemBoxCarrinho(
     nome: String?,
-    preco: String?,
+    preco: Int?,
     adicionarProduto: (Int) -> Unit
 ) {
     var quantity by remember { mutableStateOf(0) } // Quantidade sendo lembrada
