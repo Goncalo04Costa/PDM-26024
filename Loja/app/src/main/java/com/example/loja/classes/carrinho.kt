@@ -34,4 +34,8 @@ class Carrinho(
             Log.d("Carrinho", "Produto não encontrado: ${prod.nome}")
         }
     }
+
+    fun calculateTotal(): Int {
+        return listaProdutos.sumOf { (it.produto?.preco ?: 0) * (it.quantidade ?: 0) }
+    }
 }

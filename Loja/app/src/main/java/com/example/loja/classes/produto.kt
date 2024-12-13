@@ -3,11 +3,12 @@ package com.example.loja.classes
 class Produto(
     val id: Int,
     val nome: String,
+    val descricao: String,  // Corrected from 'decricao' to 'descricao'
     var preco: Int?,
     var quantidade: Int
 ) {
 
-    constructor(nome: String, preco: Int) : this(0, nome, preco, 0)
+    constructor(nome: String, descricao: String, preco: Int) : this(0, nome, descricao, preco, 0)
 
     fun updatePrice(price: Int) {
         if (price >= 0) {
