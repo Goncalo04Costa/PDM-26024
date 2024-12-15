@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696114987205",
+    "project_id": "supermercado-aea1e",
+    "storage_bucket": "supermercado-aea1e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696114987205:android:a5d6f33acb2854f13930ac",
+        "android_client_info": {
+          "package_name": "com.example.carrinhodecompras"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_CUhXVfkLYMSRkXNmb1vIZ6CsvbEt7yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
