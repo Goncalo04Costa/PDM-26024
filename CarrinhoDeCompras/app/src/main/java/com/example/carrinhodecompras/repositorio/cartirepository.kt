@@ -47,7 +47,6 @@ class CartRepository {
             }
             cartCollection.document(userId).set(mapOf("items" to updatedItems)).await()
         } catch (e: Exception) {
-            // Handle exceptions (e.g., log errors)
         }
     }
 
