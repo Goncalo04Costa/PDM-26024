@@ -94,7 +94,7 @@ fun CustomTextField(
     isPassword: Boolean = false,
     errorMessage: String? = null
 ) {
-    // Cor do texto de erro
+
     val errorColor = if (errorMessage != null) Color.Red else Color.Transparent
 
     TextField(
@@ -103,7 +103,7 @@ fun CustomTextField(
         label = { Text(label) },
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         modifier = Modifier.fillMaxWidth(),
-        isError = errorMessage != null, // Se houver mensagem de erro, marca como erro
+        isError = errorMessage != null,
         singleLine = true,
         supportingText = {
             if (errorMessage != null) {

@@ -32,7 +32,8 @@ class AuthRepository {
             User(
                 id = it.uid,
                 name = it.displayName ?: "",
-                email = it.email ?: ""
+                email = it.email ?: "",
+                password = it
             )
         }
     }

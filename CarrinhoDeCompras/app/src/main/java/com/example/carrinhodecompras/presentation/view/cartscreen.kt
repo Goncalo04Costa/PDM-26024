@@ -26,10 +26,6 @@ fun CartScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         when {
-            state.isLoading -> {
-                // Exibir o indicador de progresso quando estiver carregando
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-            }
             state.error != null -> {
                 // Exibir o erro, se houver
                 Text(state.error, color = Color.Red, style = MaterialTheme.typography.bodyLarge, modifier = Modifier.align(Alignment.CenterHorizontally))
@@ -94,7 +90,7 @@ fun CartItemView(cartItem: CartItem) {
                 Text(cartItem.product.name, style = MaterialTheme.typography.bodyLarge)
                 Text("Quantidade: ${cartItem.quantity}", style = MaterialTheme.typography.bodyMedium)
             }
-            Text("Subtotal: R$${cartItem.product.price * cartItem.quantity}", style = MaterialTheme.typography.bodyLarge)
+            Text("Subtotal: R$${cartItem.product.price multiply cartItem.quantity}", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }

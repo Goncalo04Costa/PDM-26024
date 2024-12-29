@@ -57,14 +57,14 @@ class MainActivity : ComponentActivity() {
                 )
             }
             composable("login") {
-                // A tela de login será aqui (não foi implementada no seu código)
+
             }
             composable("product_list") {
                 ProductListScreen(
                     productViewModel = ProductViewModel(productRepository),
                     onNavigateToCart = { navController.navigate("cart") },
                     onAddToCart = { product ->
-                        // Adiciona ao carrinho
+
                     }
                 )
             }
@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
                 CartScreen(
                     cartViewModel = CartViewModel(cartRepository),
                     onCheckout = {
-                        // Implementar checkout
+
                     }
                 )
             }

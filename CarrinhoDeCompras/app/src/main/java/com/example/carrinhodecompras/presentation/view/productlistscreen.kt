@@ -37,14 +37,13 @@ fun ProductListScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Displaying loading indicator when the data is being fetched
         if (state.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         } else if (state.error != null) {
-            // Displaying error message if there is one
+
             Text(state.error, color = Color.Red, modifier = Modifier.align(Alignment.CenterHorizontally))
         } else {
-            // Displaying list of products
+
             LazyColumn {
                 items(state.products) { product ->
                     Column(
@@ -68,7 +67,7 @@ fun ProductListScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Button to navigate to the Cart
+
         Button(onClick = onNavigateToCart) {
             Text("Ver Carrinho")
         }
