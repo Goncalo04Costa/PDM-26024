@@ -3,38 +3,31 @@ package com.example.goncalonews.app.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goncalonews.app.data.remote.api.RetrofitInstance
-import com.example.goncalonews.app.data.repository.noticiarepository.NoticiaRepositoryImpl
+import com.example.goncalonews.app.data.remote.repository.NoticiaRepositoryImpl
 import com.example.goncalonews.app.domain.model.Noticia
-import com.example.goncalonews.app.domain.repository.NoticiaRepository
 import com.example.goncalonews.app.domain.use_case.GetNoticiasUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class NoticiaViewModel : ViewModel() {
-    // Instância do Retrofit API
+class NoticeListViewModel : ViewModel() {
+    // Inicializando o Retrofit e o repositório
     private val api = RetrofitInstance.api
-    // Repositório de notícias
     private val repository = NoticiaRepositoryImpl(api)
-    // Caso de uso para obter notícias
     private val getNoticiasUseCase = GetNoticiasUseCase(repository)
 
-    // MutableStateFlow para armazenar a lista de notícias
+    // Expondo um StateFlow imutável para ser observado pela UI
     private val _noticias = MutableStateFlow<List<Noticia>>(emptyList())
-
-    // Exposição imutável para a lista de notícias
     val noticias: StateFlow<List<Noticia>> = _noticias
 
-    // Função para buscar as notícias
+    // Função para buscar as notícias da API
     fun fetchNoticias() {
         viewModelScope.launch {
             try {
-
-                _noticias.value = getNoticiasUseCase()
+                val noticiasResponse = getNoticiasUseCase() // Chamada à API
+                _noticias.value = noticiasResponse // Atualiza o estado com as notícias
             } catch (e: Exception) {
-
-                _noticias.value = emptyList()
-                e.printStackTrace()
+                _noticias.value = emptyList() // Caso haja erro, mantém a lista vazia
             }
         }
     }
