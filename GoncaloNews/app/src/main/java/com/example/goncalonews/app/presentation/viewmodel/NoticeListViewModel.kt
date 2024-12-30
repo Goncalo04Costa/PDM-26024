@@ -11,23 +11,23 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class NoticeListViewModel : ViewModel() {
-    // Inicializando o Retrofit e o repositório
+
     private val api = RetrofitInstance.api
     private val repository = NoticiaRepositoryImpl(api)
     private val getNoticiasUseCase = GetNoticiasUseCase(repository)
 
-    // Expondo um StateFlow imutável para ser observado pela UI
+
     private val _noticias = MutableStateFlow<List<Noticia>>(emptyList())
     val noticias: StateFlow<List<Noticia>> = _noticias
 
-    // Função para buscar as notícias da API
+
     fun fetchNoticias() {
         viewModelScope.launch {
             try {
-                val noticiasResponse = getNoticiasUseCase() // Chamada à API
-                _noticias.value = noticiasResponse // Atualiza o estado com as notícias
+                val noticiasResponse = getNoticiasUseCase()
+                _noticias.value = noticiasResponse
             } catch (e: Exception) {
-                _noticias.value = emptyList() // Caso haja erro, mantém a lista vazia
+                _noticias.value = emptyList()
             }
         }
     }

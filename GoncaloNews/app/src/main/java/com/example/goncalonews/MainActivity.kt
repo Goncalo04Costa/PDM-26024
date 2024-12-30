@@ -26,23 +26,23 @@ class MainActivity : ComponentActivity() {
     fun MainScreen() {
         var selectedNoticiaTitle by remember { mutableStateOf<String?>(null) }
 
-        // Se não há notícia selecionada, mostrar a lista de notícias
+
         if (selectedNoticiaTitle == null) {
             val noticeListViewModel: NoticeListViewModel = viewModel()
             NoticeListScreen(noticeListViewModel) { noticiaTitle ->
-                // Quando uma notícia é clicada, mudar o título da notícia selecionada
+                
                 selectedNoticiaTitle = noticiaTitle
             }
-        } //else {
-            // Caso haja uma notícia selecionada, mostrar os detalhes dessa notícia
-        // val noticeDetailViewModel: NoticeDetailViewModel = viewModel()
-        // NoticeDetailScreen(
-        //      viewModel = noticeDetailViewModel,
-        //      weburl = selectedNoticiaTitle!!,
-        //       onBackClick = {
-        //           selectedNoticiaTitle = null
-        // }
-        //)
-        //    }
+        } else {
+
+         val noticeDetailViewModel: NoticeDetailViewModel = viewModel()
+         NoticeDetailScreen(
+              viewModel = noticeDetailViewModel,
+              weburl = selectedNoticiaTitle!!,
+               onBackClick = {
+                   selectedNoticiaTitle = null
+         }
+        )
+            }
     }
 }

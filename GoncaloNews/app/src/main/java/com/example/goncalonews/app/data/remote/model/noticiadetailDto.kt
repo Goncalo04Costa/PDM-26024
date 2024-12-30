@@ -9,7 +9,7 @@ data class NoticiaDetailDto(
     val lead_paragraph: String
 )
 
-// Função de extensão para converter NoticiaDetailDto para NoticiaDetalhada
+
 fun NoticiaDetailDto.toNoticiaDetalhada(): NoticiaDetalhada {
     return NoticiaDetalhada(
         title = this.title,

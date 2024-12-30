@@ -8,7 +8,7 @@ data class NoticiaDto(
     val published_date: String
 )
 
-// Função de extensão para converter NoticiaDto para Noticia
+
 fun NoticiaDto.toNoticia(): Noticia {
     return Noticia(
         title = this.title,
