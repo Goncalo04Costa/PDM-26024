@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "436416184419",
+    "project_id": "goncaloc-f2e6d",
+    "storage_bucket": "goncaloc-f2e6d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436416184419:android:28b11b3ee161bd629f7856",
+        "android_client_info": {
+          "package_name": "com.example.goncalostore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeB-pGS00M9axbD9oN2uXJfqx9WYuvXBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

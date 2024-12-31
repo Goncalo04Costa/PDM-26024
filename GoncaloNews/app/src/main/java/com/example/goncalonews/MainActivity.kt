@@ -33,16 +33,16 @@ class MainActivity : ComponentActivity() {
                 
                 selectedNoticiaTitle = noticiaTitle
             }
-        } else {
+        } //else {
 
-         val noticeDetailViewModel: NoticeDetailViewModel = viewModel()
-         NoticeDetailScreen(
-              viewModel = noticeDetailViewModel,
-              weburl = selectedNoticiaTitle!!,
-               onBackClick = {
-                   selectedNoticiaTitle = null
-         }
-        )
-            }
+//         val noticeDetailViewModel: NoticeDetailViewModel = viewModel()
+  //       NoticeDetailScreen(
+    //          viewModel = noticeDetailViewModel,
+      //        weburl = selectedNoticiaTitle!!,
+        //       onBackClick = {
+           //        selectedNoticiaTitle = null
+         //}
+        //)
+          //  }
     }
 }
