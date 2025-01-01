@@ -37,11 +37,13 @@ import com.example.goncalostore.elements.CreateText
 @Composable
 fun MenuProdutos(
     viewModelProdutos: ProdutosViewModel,
-    viewModelUtilizador: LoginViewModel, // Corrigido para LoginViewModel
+    viewModelUtilizador: LoginViewModel,
     navController: NavController,
 ) {
     val listProducts = remember { mutableStateOf(emptyList<Product>()) }
     val isLoading = remember { mutableStateOf(true) }
+    val errorMessage = remember { mutableStateOf<String?>(null) }
+
     LaunchedEffect(Unit) {
         try {
             val products = viewModelProdutos.FetchProducts()
@@ -49,22 +51,33 @@ fun MenuProdutos(
             isLoading.value = false
         } catch (e: Exception) {
             Log.d("ProdutosScreen", "Erro:${e}")
+            errorMessage.value = "Erro ao carregar produtos. Tente novamente."
+            isLoading.value = false
         }
     }
-    Log.d("ProdutosScreen", "Produtos: ${listProducts}")
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Show loading indicator while data is being fetched
         if (isLoading.value) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 CircularProgressIndicator()
             }
-        } else {
+        }
+
+        // Show error message if there was an issue fetching data
+        errorMessage.value?.let {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    text = it,
+                    color = Color.Red,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
+        // Display product list
+        if (errorMessage.value == null && !isLoading.value) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -79,11 +92,11 @@ fun MenuProdutos(
                             modifier = Modifier.fillMaxSize(),
                             color = Color.Black,
                             textAlign = TextAlign.Center,
-                            32.sp
+                            fontSize = 32.sp
                         )
                     }
                 } else {
-                    items(listProducts.value) { item ->
+                    items(listProducts.value, key = { it.nome!! }) { item ->
                         ProductItemBox(
                             nome = item.nome,
                             descricao = item.descricao,
@@ -94,15 +107,13 @@ fun MenuProdutos(
             }
         }
 
+        // Bottom "Add Product" button
         TextButton(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .fillMaxWidth()
                 .padding(bottom = 72.dp)
-                .background(
-                    color = Color.LightGray,
-                    shape = RoundedCornerShape(12.dp)
-                ),
+                .background(color = Color(0xFF4CAF50), shape = RoundedCornerShape(12.dp)),
             onClick = {
                 navController.navigate("AddProduct")
             }
@@ -114,25 +125,18 @@ fun MenuProdutos(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "Adicionar Produto",
-                    fontSize = 24.sp
-                )
-                Text(
-                    text = "+",
-                    color = Color.White,
-                    fontSize = 24.sp
-                )
+                Text(text = "Adicionar Produto", fontSize = 24.sp, color = Color.White)
+                Text(text = "+", color = Color.White, fontSize = 24.sp)
             }
         }
 
+        // Bottom navigation buttons
         CreateBottomButtons(
             clickMenu = {},
             clickCarrinho = { navController.navigate("CarrinhosScreen") },
-            clickProdutos = { navController.navigate("ProdutosScreen") }, // Corrigido para navegar corretamente
+            clickProdutos = { navController.navigate("ProdutosScreen") },
             clickLogout = {
                 try {
-                    // Agora usando o viewModelUtilizador corretamente para o signOut
                     viewModelUtilizador.signOut()
                     Log.d("MenuUtilizadorScreen", "Logout efetuado com sucesso")
                     navController.navigate("Login")
@@ -151,8 +155,8 @@ fun ProductItemBox(nome: String?, descricao: String?, preco: String?) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .border(1.dp, Color.Black, shape = RoundedCornerShape(8.dp))
-                .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
+                .border(1.dp, Color(0xFF388E3C), shape = RoundedCornerShape(8.dp)) // Bordas verde escuro
+                .background(Color(0xFF81C784), shape = RoundedCornerShape(8.dp)) // Verde claro
         ) {
             Column(
                 modifier = Modifier
@@ -172,7 +176,7 @@ fun ProductItemBox(nome: String?, descricao: String?, preco: String?) {
                     }
                 }
                 if (descricao != null) {
-                    CreateText(descricao, Modifier.padding(top = 8.dp), Color.Cyan, null, 16.sp)
+                    CreateText(descricao, Modifier.padding(top = 8.dp), Color.Black, null, 16.sp) // Verde escuro para a descrição
                 }
             }
         }

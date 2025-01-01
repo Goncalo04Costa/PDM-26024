@@ -29,7 +29,7 @@ class NewUserViewModel: ViewModel() {
                 }
                 isUserAdded
             } else {
-                Log.d("RegistoUtilizadorViewModel", "Erro ao criar usuário com Firebase Auth")
+                Log.d("RegistoUtilizadorViewModel", "Erro ao criar user ")
                 false
             }
         } catch (e: Exception) {

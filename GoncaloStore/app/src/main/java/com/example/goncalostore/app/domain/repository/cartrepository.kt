@@ -8,7 +8,7 @@ import kotlinx.coroutines.tasks.await
 suspend fun NewCart(carrinhoToAdd:Cart,databaseReference: FirebaseFirestore):Boolean{
     return try{
         carrinhoToAdd.idCarrinho?.let{
-            databaseReference.collection("Carrinhos")
+            databaseReference.collection("Carts")
                 .document(it)
                 .set(carrinhoToAdd)
                 .await()

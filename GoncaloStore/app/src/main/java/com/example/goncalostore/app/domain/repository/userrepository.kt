@@ -7,11 +7,11 @@ import kotlinx.coroutines.tasks.await
 
 suspend fun NewUser(userToAdd: User, databaseReference: FirebaseFirestore): Boolean {
     return try {
-        databaseReference.collection("Utilizador")
+        databaseReference.collection("Users")
             .document(userToAdd.email)
             .set(userToAdd)
             .await()
-        Log.d("FunctionsDatabase", "Utilizador adicionado à base de dados ${userToAdd.email}")
+        Log.d("FunctionsDatabase", "Sucesso ${userToAdd.email}")
         true
     } catch (e: Exception) {
         Log.d("FunctionsDatabase", "Erro ao adicionar: ${userToAdd.email}", e)

@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class CarrinhosViewModel: ViewModel() {
+class CartsViewModel: ViewModel() {
     val database = Firebase.firestore
 
 
@@ -19,10 +19,10 @@ class CarrinhosViewModel: ViewModel() {
         var resultCarrinhos = emptyList<Cart>()
         return try{
             resultCarrinhos = FetchCart(database)
-            Log.d("CarrinhosViewModel","Carrinhos fetched:${resultCarrinhos}")
+            Log.d("CartsViewModel","Carrinhos fetched:${resultCarrinhos}")
             resultCarrinhos
         }catch (e:Exception){
-            Log.d("CarrinhosViewModel","Erro:${e}")
+            Log.d("CartsViewModel","Erro:${e}")
             emptyList()
         }
     }
@@ -31,7 +31,7 @@ class CarrinhosViewModel: ViewModel() {
             val resultCarrinho = com.example.goncalostore.app.domain.repository.NewCart(carrinho,database)
             resultCarrinho
         }catch(e:Exception){
-            Log.d("CarrinhosViewModel","Erro:${e}")
+            Log.d("CartsViewModel","Erro:${e}")
             false
         }
     }

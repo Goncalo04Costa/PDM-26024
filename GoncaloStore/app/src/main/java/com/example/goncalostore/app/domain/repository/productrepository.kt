@@ -8,7 +8,7 @@ import kotlinx.coroutines.tasks.await
 suspend fun NewProduct(productToAdd: Product, databaseReference: FirebaseFirestore):Boolean{
     return try {
         productToAdd.nome?.let {
-            databaseReference.collection("Produtos")
+            databaseReference.collection("Products")
                 .document(it)
                 .set(productToAdd)
                 .await()
@@ -23,7 +23,7 @@ suspend fun NewProduct(productToAdd: Product, databaseReference: FirebaseFiresto
 suspend fun FetchProducts(databaseReference: FirebaseFirestore):List<Product>{
     var listProducts = emptyList<Product>()
     return try{
-        val productsDatabase = databaseReference.collection("Produtos")
+        val productsDatabase = databaseReference.collection("Products")
             .get()
             .await()
         listProducts = productsDatabase.map { product->

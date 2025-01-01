@@ -1,7 +1,5 @@
 package com.example.goncalostore.app.presentation.view
 
-
-
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,43 +24,57 @@ import com.google.gson.Gson
 @Composable
 fun MenuUtilizador(viewModel: LoginViewModel,
                    navController: NavController,
-                   utlzObject:String?){
+                   utlzObject: String?) {
     val user = FirebaseAuth.getInstance().currentUser
     val userId = user?.uid
-    val decodedUtlz = Gson().fromJson(utlzObject,User::class.java)
+    val decodedUtlz = Gson().fromJson(utlzObject, User::class.java)
     decodedUtlz.uid = userId
-    Log.d("MenuUtilizadorScreen","Objeto:${decodedUtlz}")
+
     val nameUtlz = decodedUtlz.email.substringBefore("@gmail.com")
-    Box(modifier= Modifier
-        .fillMaxSize()){
-        CreateTextTitle("Bem-vindo ${nameUtlz}",
+
+    // New color scheme
+    val backgroundColor = Color(0xFFF1F8E9) // Light Green Background
+    val textColor = Color(0xFF388E3C) // Darker Green for Text
+    val titleColor = Color(0xFF1B5E20) // Deep Green for Title
+    val buttonColor = Color(0xFF43A047) // Button Green
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        CreateTextTitle(
+            "Bem-vindo à GonçaloStore",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(0.dp,20.dp,0.dp,0.dp)
-            ,Color.Black,
-            32.sp)
+                .padding(0.dp, 20.dp, 0.dp, 0.dp),
+            color = titleColor,
+            size = 32.sp
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
-        ){
-
+        ) {
+            // You can add more content here if needed
         }
+
         CreateBottomButtons(
             clickMenu = {},
-            clickCarrinho={navController.navigate("CarrinhosScreen")},
-            clickProdutos={navController.navigate("ProdutosScreen")
-                Log.d("Teste","Clicked")},
+            clickCarrinho = { navController.navigate("CarrinhosScreen") },
+            clickProdutos = {
+                navController.navigate("ProdutosScreen")
+                Log.d("Teste", "Clicked")
+            },
             clickLogout = {
-                try{
+                try {
                     viewModel.signOut()
-                    Log.d("MenuUtilizadorScreen","Logout efetuado com sucesso")
+                    Log.d("MenuUtilizadorScreen", "Logout efetuado com sucesso")
                     navController.navigate("Login")
-                }catch(e:Exception){
-                    Log.d("MenuUtilizadorScreen","Erro ao dar logout:${e}")
+                } catch (e: Exception) {
+                    Log.d("MenuUtilizadorScreen", "Erro ao dar logout: ${e}")
                 }
-            })
+            },
+            buttonColor = buttonColor // Adjust button color here
+        )
     }
 }

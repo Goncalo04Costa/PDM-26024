@@ -17,7 +17,7 @@ class LoginViewModel: ViewModel(){
             true
         }
         catch (e:Exception){
-            Log.d("LoginViewModel","Não funcionei excecao:${e}")
+            Log.d("LoginViewModel","Erro:${e}")
             false
         }
     }
@@ -25,7 +25,7 @@ class LoginViewModel: ViewModel(){
         try{
             auth.signOut()
         }catch(e:Exception){
-            Log.d("MenuUtilizadorViewModel","Não funcionei excecao:${e}")
+            Log.d("MenuUtilizadorViewModel","Erro:${e}")
         }
     }
 }

@@ -32,14 +32,14 @@ import androidx.navigation.NavController
 import com.example.goncalostore.app.domain.model.Cart
 import com.example.goncalostore.app.domain.model.CartItem
 import com.example.goncalostore.app.domain.model.Product
-import com.example.goncalostore.app.presentation.viewmodel.CarrinhosViewModel
+import com.example.goncalostore.app.presentation.viewmodel.CartsViewModel
 import com.example.goncalostore.app.presentation.viewmodel.ProdutosViewModel
 import com.example.goncalostore.elements.CreateText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddCarrinho(viewModelCarrinho: CarrinhosViewModel,
+fun AddCarrinho(viewModelCarrinho: CartsViewModel,
                 viewModelProduto: ProdutosViewModel,
                 navController: NavController){
     val listProducts = remember { mutableStateOf(emptyList<Product>()) }
@@ -54,7 +54,6 @@ fun AddCarrinho(viewModelCarrinho: CarrinhosViewModel,
             Log.d("AddCarrinhoScreen","Ocorreu um erro ao dar fetch dos produtos:${e}")
         }
     }
-
 
     Box(modifier = Modifier
         .fillMaxSize()){
@@ -84,41 +83,41 @@ fun AddCarrinho(viewModelCarrinho: CarrinhosViewModel,
                             Log.d("AddCarrinhoScreen","Erro ao adicionar o carrinho:${e}")
                         }
                     }
-                }){
-                    Text("Adicionar carrinho")
+                }) {
+                    Text("Adicionar carrinho", color = Color.White)
                 }
             }
         }
     }
 }
 
-fun GenerateCarrinho(listProducts:List<CartItem>): Cart {
+fun GenerateCarrinho(listProducts: List<CartItem>): Cart {
     val userInstance = FirebaseAuth.getInstance().currentUser
-    val nameUser =userInstance?.email?.substringBefore("@gmail.com")
+    val nameUser = userInstance?.email?.substringBefore("@gmail.com")
     val newCarrinho = Cart(idCarrinho = "2", donoCarrinho = nameUser)
-    if(listProducts.isEmpty())
+    if (listProducts.isEmpty())
         return newCarrinho
 
-    for(product in listProducts){
+    for (product in listProducts) {
         newCarrinho.listaProdutos.add(product)
-        Log.d("AddCarrinhoScreen","Product added:${product.produto}")
-        Log.d("AddCarrinhoScreen","Product added:${product.quantidade}")
-        Log.d("AddCarrinhoScreen","List:${newCarrinho.listaProdutos}")
+        Log.d("AddCarrinhoScreen", "Product added:${product.produto}")
+        Log.d("AddCarrinhoScreen", "Product added:${product.quantidade}")
+        Log.d("AddCarrinhoScreen", "List:${newCarrinho.listaProdutos}")
     }
     return newCarrinho
 }
 
 @Composable
-fun ProductItemBoxCarrinho(nome:String?, descricao:String?, preco:String?,
-                           adicionarProduto:(Int)->Unit={}){
-    var quantity by remember{ mutableStateOf(0)}
-    if(!nome.isNullOrEmpty() || !descricao.isNullOrEmpty() || !preco.isNullOrEmpty()){
+fun ProductItemBoxCarrinho(nome: String?, descricao: String?, preco: String?,
+                           adicionarProduto: (Int) -> Unit = {}) {
+    var quantity by remember { mutableStateOf(0) }
+    if (!nome.isNullOrEmpty() || !descricao.isNullOrEmpty() || !preco.isNullOrEmpty()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .border(1.dp, Color.Black,shape = RoundedCornerShape(8.dp))
-                .background(Color.LightGray,shape = RoundedCornerShape(8.dp))
+                .border(1.dp, Color(0xFF388E3C), shape = RoundedCornerShape(8.dp)) // Bordas verde escuro
+                .background(Color(0xFF81C784), shape = RoundedCornerShape(8.dp)) // Verde claro
         ) {
             Column(
                 modifier = Modifier
@@ -130,15 +129,15 @@ fun ProductItemBoxCarrinho(nome:String?, descricao:String?, preco:String?,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     if (nome != null) {
-                        CreateText(nome,Modifier.align(Alignment.Top),Color.Black,null,16.sp)
+                        CreateText(nome, Modifier.align(Alignment.Top), Color.Black, null, 18.sp) // Preto para o nome
                     }
                     if (preco != null) {
-                        CreateText(preco+"€",Modifier.align(Alignment.CenterVertically),Color.Black,
-                            TextAlign.End,16.sp)
+                        CreateText(preco + "€", Modifier.align(Alignment.CenterVertically), Color.Black,
+                            TextAlign.End, 16.sp) // Preto para o preço
                     }
                 }
                 if (descricao != null) {
-                    CreateText(descricao,Modifier.padding(top = 8.dp),Color.Cyan,null,16.sp)
+                    CreateText(descricao, Modifier.padding(top = 8.dp), Color(0xFF388E3C), null, 14.sp) // Verde escuro para a descrição
                 }
                 Row(
                     modifier = Modifier
@@ -146,33 +145,37 @@ fun ProductItemBoxCarrinho(nome:String?, descricao:String?, preco:String?,
                     horizontalArrangement = Arrangement.End
                 ) {
                     TextButton(onClick = {
-                        adicionarProduto(quantity)}){
-                        Text("Adicionar ao carrinho")
+                        adicionarProduto(quantity)
+                    }) {
+                        Text("Adicionar ao carrinho", color = Color.White) // Texto branco para o botão
                     }
 
                     TextButton(onClick = {
                         val currentQuantity = quantity
-                        if (currentQuantity>0 ){
-                            quantity= (currentQuantity-1)
-                        }else {
+                        if (currentQuantity > 0) {
+                            quantity = (currentQuantity - 1)
+                        } else {
                             quantity = 0
                         }
-                    }){
-                        Text("-") }
+                    }) {
+                        Text("-", color = Color.White) // Branco para o botão de diminuir quantidade
+                    }
+
                     CreateText(
                         "$quantity",
                         modifier = Modifier
                             .align(Alignment.CenterVertically)
                             .padding(horizontal = 16.dp),
                         color = Color.Black,
-                        null,
-                        16.sp
+                        textAlign = null,
+                        fontSize = 16.sp // Preto para a quantidade
                     )
                     TextButton(onClick = {
                         val currentQuantity = quantity
-                        quantity = (currentQuantity+1)
-                    }){
-                        Text("+") }
+                        quantity = (currentQuantity + 1)
+                    }) {
+                        Text("+", color = Color.White)
+                    }
                 }
             }
         }
