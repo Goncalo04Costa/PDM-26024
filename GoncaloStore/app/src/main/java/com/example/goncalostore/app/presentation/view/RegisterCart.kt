@@ -133,7 +133,7 @@ fun ProductItemBoxCarrinho(nome: String?, descricao: String?, preco: String?,
                     }
                     if (preco != null) {
                         CreateText(preco + "€", Modifier.align(Alignment.CenterVertically), Color.Black,
-                            TextAlign.End, 16.sp) // Preto para o preço
+                            TextAlign.End, 16.sp)
                     }
                 }
                 if (descricao != null) {
@@ -147,7 +147,7 @@ fun ProductItemBoxCarrinho(nome: String?, descricao: String?, preco: String?,
                     TextButton(onClick = {
                         adicionarProduto(quantity)
                     }) {
-                        Text("Adicionar ao carrinho", color = Color.White) // Texto branco para o botão
+                        Text("Adicionar ao carrinho", color = Color.White)
                     }
 
                     TextButton(onClick = {
@@ -158,7 +158,7 @@ fun ProductItemBoxCarrinho(nome: String?, descricao: String?, preco: String?,
                             quantity = 0
                         }
                     }) {
-                        Text("-", color = Color.White) // Branco para o botão de diminuir quantidade
+                        Text("-", color = Color.White)
                     }
 
                     CreateText(
@@ -168,7 +168,7 @@ fun ProductItemBoxCarrinho(nome: String?, descricao: String?, preco: String?,
                             .padding(horizontal = 16.dp),
                         color = Color.Black,
                         textAlign = null,
-                        fontSize = 16.sp // Preto para a quantidade
+                        fontSize = 16.sp
                     )
                     TextButton(onClick = {
                         val currentQuantity = quantity

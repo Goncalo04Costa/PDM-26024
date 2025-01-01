@@ -99,8 +99,8 @@ fun CarrinhosScreen(
 
         CreateBottomButtons(
             clickMenu = {},
-            clickCarrinho = {},
-            clickProdutos = { navController.navigate(this) },
+            clickCarrinho = {navController.navigate("CarrinhosScreen")},
+            clickProdutos = {  navController.navigate("ProdutosScreen") },
             clickLogout = {
                 try {
                     viewModelUtilizador.signOut()
