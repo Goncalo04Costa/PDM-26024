@@ -1,5 +1,6 @@
 package com.example.goncalonews.app.data.remote.repository
 
+import android.util.Log
 import com.example.goncalonews.app.data.remote.api.NYtimesAPI
 import com.example.goncalonews.app.data.remote.model.toNoticia
 import com.example.goncalonews.app.data.remote.model.toNoticiaDetalhada
@@ -16,7 +17,10 @@ class NoticiaRepositoryImpl(private val api: NYtimesAPI) : NoticiaRepository {
 
 
     override suspend fun getNoticiasDetalhadas(noticiatitle: String): NoticiaDetalhada {
+
         // A função de conversão agora está correta
-        return api.getNoticiaDetalhada(noticiatitle).docs.first().toNoticiaDetalhada()  // Mapeia para NoticiaDetalhada
+        Log.d("NoticiaRepositoryImpl","API call: ${api.getNoticiaDetalhada(noticiatitle)}")
+        return api.getNoticiaDetalhada(noticiatitle).docs. { it.toNoticiaDetalhada() }
+        // Mapeia para NoticiaDetalhada
     }
 }

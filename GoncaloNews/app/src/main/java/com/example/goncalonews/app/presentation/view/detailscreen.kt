@@ -34,8 +34,8 @@ fun NoticeDetailScreen(viewModel: NoticeDetailViewModel, weburl: String, onBackC
 
 
         if (noticia != null) {
-            Text(text = noticia.title, style = MaterialTheme.typography.headlineMedium)
-            Text(text = noticia.published_date, style = MaterialTheme.typography.bodySmall)
+            Text(text = noticia.web_url, style = MaterialTheme.typography.headlineMedium)
+            Text(text = noticia.abstract, style = MaterialTheme.typography.bodySmall)
             Text(text = noticia.lead_paragraph, style = MaterialTheme.typography.bodyLarge)
         } else {
             // Exibe uma mensagem de "Carregando..." caso os dados ainda não tenham sido carregados

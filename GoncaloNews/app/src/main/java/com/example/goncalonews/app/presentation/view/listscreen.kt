@@ -32,7 +32,7 @@ fun NoticeListScreen(viewModel: NoticeListViewModel, onItemClick: (String) -> Un
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
-                        .clickable { onItemClick(noticia.web_url)},
+                        .clickable { onItemClick(noticia.url)},
                     style = MaterialTheme.typography.bodyLarge
                 )
             }

@@ -5,6 +5,6 @@ import com.example.goncalonews.app.domain.repository.NoticiaRepository
 
 class GetNoticiasDetalhadasUseCase(private val repository: NoticiaRepository){
     suspend operator fun invoke (weburl:String): NoticiaDetalhada {
-        return  repository.getNoticiasDetalhadas((weburl))
+        return  repository.getNoticiasDetalhadas(weburl)
     }
 }

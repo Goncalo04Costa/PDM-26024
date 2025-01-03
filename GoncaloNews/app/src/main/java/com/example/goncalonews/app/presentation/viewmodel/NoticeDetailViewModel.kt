@@ -1,5 +1,6 @@
 package com.example.goncalonews.app.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.goncalonews.app.data.remote.api.RetrofitInstance
@@ -16,9 +17,11 @@ class NoticeDetailViewModel : ViewModel() {
 
     val noticiadetalhada = MutableStateFlow<NoticiaDetalhada?>(null)
 
+
     fun fetchnoticiadetalhada(noticiatitle: String) {
         viewModelScope.launch {
             try {
+                Log.d("fetchnoticiasdetalhadas","${noticiatitle}")
                 noticiadetalhada.value = getNoticiasDetalhadasUseCase(noticiatitle)
             } catch (e: Exception) {
                 noticiadetalhada.value = null

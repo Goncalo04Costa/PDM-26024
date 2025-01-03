@@ -4,7 +4,7 @@ import com.example.goncalonews.app.domain.model.Noticia
 
 data class NoticiaDto(
     val title: String,
-    val web_url: String,
+    val url: String,
     val published_date: String
 )
 
@@ -12,7 +12,7 @@ data class NoticiaDto(
 fun NoticiaDto.toNoticia(): Noticia {
     return Noticia(
         title = this.title,
-        web_url = this.web_url,
+        url = this.url,
         published_date = this.published_date
     )
 }
