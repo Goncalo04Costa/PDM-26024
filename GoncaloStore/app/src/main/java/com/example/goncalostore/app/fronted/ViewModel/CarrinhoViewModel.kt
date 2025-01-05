@@ -101,10 +101,10 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
             // Verificar se o produto já existe na lista
             val produtoExistente = novaListaProdutos.find { it.produto?.id == produto.id }
             if (produtoExistente != null) {
-                // Atualizar a quantidade do produto existente
+                // Incrementar a quantidade do produto existente
                 produtoExistente.quantidade += 1
             } else {
-                // Adicionar o novo produto na lista
+                // Adicionar um novo produto como item separado
                 novaListaProdutos.add(
                     Produtocarrinho(
                         carrinhoId = carrinhoAtual.id,
@@ -118,7 +118,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
             val carrinhoAtualizado = carrinhoAtual.copy(produtos = novaListaProdutos)
             Log.d("CarrinhoViewModel", "Carrinho atualizado: $carrinhoAtualizado")
 
-            // Atualizar no Firebase
+            // Salvar no Firebase
             database.collection("Carrinhos")
                 .document(carrinhoAtual.id)
                 .set(carrinhoAtualizado.toStore(), SetOptions.merge())
