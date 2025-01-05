@@ -15,7 +15,7 @@ suspend fun NewProduct(productToAdd: Product, databaseReference: FirebaseFiresto
         }
         true
     }catch(e:Exception){
-        Log.d("FunctionsDatabase","Não foi adicionado: ${e}")
+        Log.d("ProductRepoistory","Não foi adicionado: ${e}")
         false
     }
 }
@@ -31,7 +31,7 @@ suspend fun FetchProducts(databaseReference: FirebaseFirestore):List<Product>{
         }
         listProducts
     }catch (e:Exception){
-        Log.d("FunctionsDatabaseFetch","Não foi dado fetch: ${e}")
+        Log.d("ProductRepoistory","Não foi dado fetch: ${e}")
         listProducts
     }
 }

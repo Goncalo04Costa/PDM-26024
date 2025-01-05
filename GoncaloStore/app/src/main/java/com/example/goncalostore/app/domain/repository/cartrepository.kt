@@ -15,7 +15,7 @@ suspend fun NewCart(carrinhoToAdd:Cart,databaseReference: FirebaseFirestore):Boo
         }
         true
     }catch(e:Exception){
-        Log.d("FunctionsDatabaseAdd","Não foi adicionado o carrinho:${e}")
+        Log.d("CartsRepository","Não foi adicionado:${e}")
         false
     }
 }
@@ -31,7 +31,7 @@ suspend fun FetchCart(databaseReference: FirebaseFirestore):List<Cart>{
         }
         listCarrinhos
     }catch(e:Exception){
-        Log.d("FcuntionsDatabaseFetch","Não foi dado fetch: ${e}")
+        Log.d("CartsRepository","Não foi dado fetch: ${e}")
         listCarrinhos
     }
 }

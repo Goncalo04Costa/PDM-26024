@@ -26,7 +26,7 @@ fun CreateText(
         modifier = modifier,
         color = color,
         textAlign = textAlign,
-        fontSize = fontSize // Apply the fontSize parameter
+        fontSize = fontSize
     )
 }
 
