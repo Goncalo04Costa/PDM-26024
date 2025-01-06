@@ -137,9 +137,10 @@ fun DrawerContent(
                 )
             )
 
-            // Produtos Submenu
+
             if (isLoggedIn) {
                 ProdutosSubmenu(navController)
+                CarrinhosSubmenu(navController)
             }
 
             Spacer(modifier = Modifier.weight(1f)) // Empurra o botão para o final
@@ -201,3 +202,37 @@ fun ProdutosSubmenu(navController: NavController) {
         }
     }
 }
+
+@Composable
+fun CarrinhosSubmenu(navController: NavController) {
+    var showSubmenu by remember { mutableStateOf(false) }
+
+    NavigationDrawerItem(
+        label = { Text("Carrinhos", color = Color.White, fontSize = 18.sp) },
+        selected = showSubmenu,
+        onClick = { showSubmenu = !showSubmenu },
+        colors = NavigationDrawerItemDefaults.colors(
+            unselectedContainerColor = DarkBlue
+        )
+    )
+
+    if (showSubmenu) {
+        Column(modifier = Modifier.padding(start = 16.dp)) {
+            NavigationDrawerItem(
+                label = { Text("Ver Carrinhos", color = Color.White, fontSize = 16.sp) },
+                selected = false,
+                onClick = {
+                    navController.navigate(Routes.LISTCARTS) {
+                        popUpTo(Routes.FEED) { inclusive = true }
+                    }
+                },
+                colors = NavigationDrawerItemDefaults.colors(
+                    unselectedContainerColor = DarkBlue
+                )
+            )
+
+        }
+    }
+}
+
+

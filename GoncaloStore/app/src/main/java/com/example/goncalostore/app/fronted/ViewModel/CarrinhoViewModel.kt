@@ -94,17 +94,18 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
         }
 
         try {
-            // Obter a lista de produtos atual
+            // Clonar a lista atual de produtos
             val novaListaProdutos = carrinhoAtual.produtos.toMutableList()
-            Log.d("CarrinhoViewModel", "Lista de produtos antes: $novaListaProdutos")
 
             // Verificar se o produto já existe na lista
             val produtoExistente = novaListaProdutos.find { it.produto?.id == produto.id }
+
             if (produtoExistente != null) {
                 // Incrementar a quantidade do produto existente
                 produtoExistente.quantidade += 1
+                Log.d("CarrinhoViewModel", "Produto existente atualizado: $produtoExistente")
             } else {
-                // Adicionar um novo produto como item separado
+                // Adicionar o novo produto à lista
                 novaListaProdutos.add(
                     Produtocarrinho(
                         carrinhoId = carrinhoAtual.id,
@@ -112,11 +113,12 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
                         quantidade = 1
                     )
                 )
+                Log.d("CarrinhoViewModel", "Novo produto adicionado: $produto")
             }
 
-            // Atualizar o carrinho com a nova lista de produtos
+            // Atualizar o carrinho com a lista de produtos modificada
             val carrinhoAtualizado = carrinhoAtual.copy(produtos = novaListaProdutos)
-            Log.d("CarrinhoViewModel", "Carrinho atualizado: $carrinhoAtualizado")
+            Log.d("CarrinhoViewModel", "Carrinho atualizado com nova lista de produtos: $carrinhoAtualizado")
 
             // Salvar no Firebase
             database.collection("Carrinhos")

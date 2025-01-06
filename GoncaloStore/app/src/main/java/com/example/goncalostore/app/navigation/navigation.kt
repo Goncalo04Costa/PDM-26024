@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.goncalostore.app.fronted.View.FeedScreen
 import com.example.goncalostore.app.fronted.View.LoginScreen
+import com.example.goncalostore.app.fronted.View.MostraCarrinhosScreen
 import com.example.goncalostore.app.fronted.View.NavBarScreen
 import com.example.goncalostore.app.fronted.View.RegisterProductScreen
 import com.example.goncalostore.app.fronted.View.RegisterUserScreen
@@ -46,6 +47,14 @@ fun AppNavigation(
         composable(Routes.ADDPRODUCT) {
             NavBarScreen(content = {
                 RegisterProductScreen(navController = navController)
+            }, navController = navController,
+                LoginViewModel = loginViewModel)
+        }
+
+
+        composable(Routes.LISTCARTS) {
+            NavBarScreen(content = {
+                MostraCarrinhosScreen(navController = navController)
             }, navController = navController,
                 LoginViewModel = loginViewModel)
         }

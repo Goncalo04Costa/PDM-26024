@@ -6,7 +6,5 @@ object  Routes {
     const val REGIST = "regist"
     const val FEED = "feed"
     const val ADDPRODUCT = "addproduct"
-    const val LISTPRODUCTS = "listproducts"
-    const val ADDCART = "addcart"
     const val LISTCARTS = "listcarts"
 }
