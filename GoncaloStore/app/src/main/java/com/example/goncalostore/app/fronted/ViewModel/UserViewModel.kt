@@ -24,13 +24,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     private val database = Firebase.firestore
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    // Estado da lista de usuários
+    // Estado da lista de utilizadores
     private val _userListFlow = MutableStateFlow<List<User>>(emptyList())
     val userList: StateFlow<List<User>> get() = _userListFlow
 
-    // Estado da seleção de dias
-    private val _selectedDays = MutableStateFlow<List<String>>(emptyList())
-    val selectedDays: StateFlow<List<String>> get() = _selectedDays
+
 
     // Estado de loading
     private val _isLoading = MutableStateFlow(false)
@@ -46,13 +44,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         return (1..daysInMonth).map { LocalDate.of(year, month, it).toString() }
     }
 
-    fun toggleDaySelection(date: String) {
-        _selectedDays.value = if (_selectedDays.value.contains(date)) {
-            _selectedDays.value - date
-        } else {
-            _selectedDays.value + date
-        }
-    }
+
 
     suspend fun addUser(
         userToAdd: User,
@@ -96,68 +88,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    suspend fun updateUser(userToUpdate: User): Boolean {
-        return try {
-            database.collection("User")
-                .document(userToUpdate.email)
-                .set(userToUpdate, SetOptions.merge())
-                .await()
-            true
-        } catch (ex: Exception) {
-            Log.d("UserViewModel", "Erro ao atualizar usuário: ${ex.message}")
-            false
-        }
+
+
+
+
     }
 
-    suspend fun deleteUser(userToDelete: User): Boolean {
-        return try {
-            database.collection("User")
-                .document(userToDelete.email)
-                .delete()
-                .await()
-            true
-        } catch (ex: Exception) {
-            Log.d("UserViewModel", "Erro ao excluir usuário: ${ex.message}")
-            false
-        }
-    }
-
-    suspend fun updateAvailableDays(userId: String, days: List<String>): Boolean {
-        return try {
-            database.collection("User")
-                .document(userId)
-                .update("availability", days)
-                .await()
-            true
-        } catch (ex: Exception) {
-            Log.d("UserViewModel", "Erro ao atualizar dias disponíveis: ${ex.message}")
-            false
-        }
-    }
-
-    fun confirmSelection() {
-        _isLoading.value = true
-        _errorMessage.value = null
-
-        viewModelScope.launch {
-            delay(1000)
-            _isLoading.value = false
-
-            if (_selectedDays.value.isNotEmpty()) {
-                val currentUser = auth.currentUser
-                currentUser?.uid?.let { userId ->
-                    val updateSuccess = updateAvailableDays(userId, _selectedDays.value)
-                    if (updateSuccess) {
-                        _errorMessage.value = null
-                    } else {
-                        _errorMessage.value = "Erro ao atualizar os dias disponíveis."
-                    }
-                } ?: run {
-                    _errorMessage.value = "Usuário não está logado."
-                }
-            } else {
-                _errorMessage.value = "Selecione pelo menos um dia."
-            }
-        }
-    }
-}

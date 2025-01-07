@@ -60,7 +60,7 @@ fun RegisterProductScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Digite o nome do produto",
+                    placeholder = "Introduza o nome do produto",
                     value = nome,
                     onValueChange = { nome = it }
                 )
@@ -74,7 +74,7 @@ fun RegisterProductScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Digite a descrição do produto",
+                    placeholder = "Introduza a descrição do produto",
                     value = descricao,
                     onValueChange = { descricao = it }
                 )
@@ -88,7 +88,7 @@ fun RegisterProductScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Digite o preço (apenas números)",
+                    placeholder = "Introduza o preço",
                     value = preco,
                     onValueChange = { preco = it }
                 )
@@ -112,7 +112,7 @@ fun RegisterProductScreen(navController: NavController) {
                     if (precoInt == null || precoInt < 0) {
                         Toast.makeText(
                             context,
-                            "Digite um valor válido para o preço.",
+                            "Valor Inválido.",
                             Toast.LENGTH_LONG
                         ).show()
                         return@CustomButton

@@ -53,10 +53,10 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
                 .set(carrinhoComUsuario)
                 .await()
 
-            onSuccess("Carrinho registrado com sucesso no Firestore")
+            onSuccess("Carrinho registado com sucesso")
             true
         } catch (ex: Exception) {
-            onFailure("Erro ao registrar carrinho: ${ex.message}")
+            onFailure("Erro ao registar carrinho: ${ex.message}")
             false
         }
     }
@@ -66,7 +66,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
         val userEmail = currentUser?.email
 
         if (userEmail == null) {
-            Log.e("CarrinhoViewModel", "Usuário não autenticado ao tentar buscar carrinhos.")
+            Log.e("CarrinhoViewModel", "Utilizador não autenticado ao tentar procurar carrinhos.")
             return emptyList()
         }
 
@@ -97,6 +97,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
             // Clonar a lista atual de produtos
             val novaListaProdutos = carrinhoAtual.produtos.toMutableList()
 
+
             // Verificar se o produto já existe na lista
             val produtoExistente = novaListaProdutos.find { it.produto?.id == produto.id }
 
@@ -120,7 +121,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
             val carrinhoAtualizado = carrinhoAtual.copy(produtos = novaListaProdutos)
             Log.d("CarrinhoViewModel", "Carrinho atualizado com nova lista de produtos: $carrinhoAtualizado")
 
-            // Salvar no Firebase
+            // Guarda no Firebase
             database.collection("Carrinhos")
                 .document(carrinhoAtual.id)
                 .set(carrinhoAtualizado.toStore(), SetOptions.merge())

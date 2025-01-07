@@ -27,7 +27,7 @@ class ProdutoViewModel(application: Application) : AndroidViewModel(application)
         onFailure: (String) -> Unit
     ): Boolean {
         return try {
-            // Validar os campos antes de salvar
+            // Validar os campos antes de guardar
             if (produtoToAdd.nome.isEmpty() || produtoToAdd.descricao.isEmpty()) {
                 throw Exception("Nome e descrição são obrigatórios.")
             }
@@ -36,20 +36,20 @@ class ProdutoViewModel(application: Application) : AndroidViewModel(application)
 
             database.collection("Produtos")
                 .document(produtoId)
-                .set(produtoToAdd.toStore()) // Salva com o ID gerado manualmente
-                .await() // Aguarda a operação assíncrona
+                .set(produtoToAdd.toStore())
+                .await()
 
-            Log.d("ProdutoViewModel", "Produto registrado com sucesso no Firestore")
+            Log.d("ProdutoViewModel", "Produto resgistado com sucesso")
             onSuccess("Produto registrado com sucesso no Firestore")
             true
         } catch (ex: Exception) {
-            Log.d("ProdutoViewModel", "Erro ao registrar produto: ${ex.message}")
+            Log.d("ProdutoViewModel", "Erro ao registar produto: ${ex.message}")
             onFailure("${ex.message}")
             false
         }
     }
 
-    // Função para buscar os produtos do Firebase
+
     suspend fun fetchProdutos(): List<Produto> {
         return try {
             val resultFirebase = fetchProdutosFirebase(database)
@@ -61,27 +61,8 @@ class ProdutoViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    // Função para atualizar o produto
-    suspend fun updateProduto(produtoToUpdate: Produto): Boolean {
-        return try {
-            updateProdutoFirebase(produtoToUpdate)
-        } catch (ex: Exception) {
-            Log.e("ProdutoViewModel", "Erro ao atualizar produto: ${ex.message}")
-            false
-        }
-    }
 
-    // Função para excluir um produto
-    suspend fun deleteProduto(produtoToDelete: Produto): Boolean {
-        return try {
-            deleteProdutoFirebase(produtoToDelete)
-        } catch (ex: Exception) {
-            Log.e("ProdutoViewModel", "Erro ao excluir produto: ${ex.message}")
-            false
-        }
-    }
 
-    // Métodos auxiliares para interação com o Firebase
     private suspend fun fetchProdutosFirebase(databasereference: FirebaseFirestore): List<Produto> {
         return try {
             val query = databasereference.collection("Produtos")
@@ -94,29 +75,5 @@ class ProdutoViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    private suspend fun updateProdutoFirebase(produtoToUpdate: Produto): Boolean {
-        return try {
-            database.collection("Produtos")
-                .document(produtoToUpdate.id.toString()) // Usando o ID como chave primária
-                .set(produtoToUpdate, SetOptions.merge()) // Atualiza somente os campos fornecidos
-                .await()
-            true
-        } catch (ex: Exception) {
-            Log.e("ProdutoViewModel", "Erro ao atualizar produto no Firebase: ${ex.message}")
-            false
-        }
-    }
 
-    private suspend fun deleteProdutoFirebase(produtoToDelete: Produto): Boolean {
-        return try {
-            database.collection("Produtos")
-                .document(produtoToDelete.id.toString()) // Usando o ID para localizar o produto
-                .delete()
-                .await()
-            true
-        } catch (ex: Exception) {
-            Log.e("ProdutoViewModel", "Erro ao excluir produto no Firebase: ${ex.message}")
-            false
-        }
-    }
 }

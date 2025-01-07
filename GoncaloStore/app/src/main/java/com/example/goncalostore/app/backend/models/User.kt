@@ -21,7 +21,6 @@ data class User(
         email: String,
         password: String,
         carrinhos: List<String>,
-        tipouser: String,
         id: Int?
     ) : this(id ?: 0,nome, email, password, carrinhos)
     // prepara dados para firebase

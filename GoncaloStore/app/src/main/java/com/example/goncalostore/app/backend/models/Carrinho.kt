@@ -13,13 +13,13 @@ data class Carrinho(
     val nome: String = "",
 
     @ColumnInfo(name = "criadoPor")
-    val criadoPor: String = "", // ID ou email do criador
+    val criadoPor: String = "",
 
     @ColumnInfo(name = "produtos")
-    val produtos: List<Produtocarrinho> = emptyList(), // Lista de produtos no carrinho
+    val produtos: List<Produtocarrinho> = emptyList(),
 
     @ColumnInfo(name = "compartilhadoCom")
-    val compartilhadoCom: List<String> = emptyList() // IDs ou emails dos usuários associados
+    val compartilhadoCom: List<String> = emptyList()
 ) {
 
     // Prepara dados para Firebase

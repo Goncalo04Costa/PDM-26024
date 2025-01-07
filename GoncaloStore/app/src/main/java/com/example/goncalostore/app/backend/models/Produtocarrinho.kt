@@ -8,9 +8,8 @@ import androidx.room.PrimaryKey
 data class Produtocarrinho(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
 
-    @ColumnInfo(name = "carrinho_id")
-    val carrinhoId: String = "", // ID do carrinho ao qual pertence
-
+    @ColumnInfo(name = "carrinhoid")
+    val carrinhoId: String = "",
     @ColumnInfo(name = "produto")
     val produto: Produto? = Produto(0, "", "", 0),
 

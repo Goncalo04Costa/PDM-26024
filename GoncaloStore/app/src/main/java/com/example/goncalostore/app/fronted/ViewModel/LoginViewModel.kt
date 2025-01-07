@@ -52,7 +52,7 @@ class LoginViewModel : ViewModel() {
         _isLoading.value = true
         try {
             val result = auth.signInWithEmailAndPassword(email, password).await()
-            _currentUser.value = result.user  // Guarda o utilizador autenticado
+            _currentUser.value = result.user
             _isLoginSuccessful.value = true
         } catch (e: Exception) {
             _errorMessage.value = e.message ?: "Erro ao fazer login."
@@ -66,7 +66,6 @@ class LoginViewModel : ViewModel() {
     fun checkUserSession() {
         _currentUser.value = auth.currentUser
     }
-
 
 
     fun signOut() {

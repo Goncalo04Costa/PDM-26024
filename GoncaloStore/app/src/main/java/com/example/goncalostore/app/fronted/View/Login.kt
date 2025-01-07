@@ -70,7 +70,7 @@ fun LoginScreen(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        drawCircles(LightBlue, "Login", 35.sp)
+        drawCircles(LightBlue, "Iniciar Sessao", 35.sp)
         drawCircles("bgg", 0.92f, 0.5f, 250f, 0f)
 
         Column(
@@ -114,37 +114,6 @@ fun LoginScreen(navController: NavController) {
                     value = password,
                     onValueChange = { loginViewModel.onPasswordChange(it) }
                 )
-
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { loginViewModel.onPasswordChange(it) },
-                    placeholder = { Text("Escreva aqui...") },
-                    visualTransformation = if (showPassword) {
-                        VisualTransformation.None
-                    } else {
-                        PasswordVisualTransformation()
-                    },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    trailingIcon = {
-                        if (showPassword){
-                            IconButton(onClick = { showPassword = false }) {
-                                Icon(
-                                    imageVector = Icons.Filled.Add,
-                                    contentDescription = "hide_password"
-                                )
-                            }
-                        } else {
-                            IconButton(
-                                onClick = { showPassword = true }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Clear,
-                                    contentDescription = "hide_password"
-                                )
-                            }
-                        }
-                    }
-                )
             }
 
             // Mensagem de erro, se houver
@@ -163,7 +132,6 @@ fun LoginScreen(navController: NavController) {
                 color = LightBlue,
                 onClick = {
                     if (!isLoading) {
-                        // Lança a corrotina para chamar a função suspensa
                         loginViewModel.viewModelScope.launch {
                             loginViewModel.signIn(email, password)
                         }

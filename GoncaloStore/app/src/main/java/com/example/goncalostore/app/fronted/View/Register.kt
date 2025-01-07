@@ -85,7 +85,7 @@ fun RegisterUserScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Digite seu nome",
+                    placeholder = "Qual o seu nome",
                     value = nome,
                     onValueChange = { nome = it }
                 )
@@ -99,7 +99,7 @@ fun RegisterUserScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Digite seu email",
+                    placeholder = "Indique o seu email",
                     value = email,
                     onValueChange = { email = it }
                 )
@@ -113,7 +113,7 @@ fun RegisterUserScreen(navController: NavController) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Digite sua senha",
+                    placeholder = "Indique a sua senha",
                     value = password,
                     onValueChange = { password = it }
                 )
@@ -121,9 +121,9 @@ fun RegisterUserScreen(navController: NavController) {
 
             }
 
-            // Botão de registro
+
             CustomButton(
-                label = "Registar Usuário",
+                label = "Registar Utilizador",
                 color = LightBlue,
                 modifier = Modifier.fillMaxWidth(0.50f),
                 onClick = {
@@ -136,7 +136,7 @@ fun RegisterUserScreen(navController: NavController) {
                         return@CustomButton
                     }
 
-                    // Criar um objeto User com os dados preenchidos
+
                     val user = User(
                         nome = nome,
                         email = email,
@@ -144,7 +144,7 @@ fun RegisterUserScreen(navController: NavController) {
                         carrinhos = listOf()
                     )
 
-                    // Salvar o usuário no Firebase ou banco local
+
                     userViewModel.viewModelScope.launch {
                         userViewModel.addUser(
                             user,
@@ -153,8 +153,8 @@ fun RegisterUserScreen(navController: NavController) {
                             },
                             onSuccess = { msg ->
                                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-                                navController.navigate("home_screen") {
-                                    popUpTo("register_user_screen") {
+                                navController.navigate("feed") {
+                                    popUpTo("regist") {
                                         inclusive = true
                                     }
                                 }

@@ -74,7 +74,7 @@ fun NavBarScreen(
                 onLogout = {
                     LoginViewModel.signOut()
                     navController.navigate(Routes.LOGIN) {
-                        popUpTo(0) // Limpa a pilha de navegação
+                        popUpTo(0)
                     }
                 }
             )
@@ -143,9 +143,9 @@ fun DrawerContent(
                 CarrinhosSubmenu(navController)
             }
 
-            Spacer(modifier = Modifier.weight(1f)) // Empurra o botão para o final
+            Spacer(modifier = Modifier.weight(1f))
 
-            // Botão de Login/Logout
+
             IconButton(
                 onClick = { if (isLoggedIn) onLogout() else navController.navigate(Routes.LOGIN) },
                 modifier = Modifier.align(Alignment.Start)
