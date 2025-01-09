@@ -38,11 +38,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     private val _errorMessage = MutableStateFlow<String?>(null)
     val errorMessage: StateFlow<String?> get() = _errorMessage
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getDaysOfMonth(month: Int, year: Int): List<String> {
-        val daysInMonth = LocalDate.of(year, month, 1).lengthOfMonth()
-        return (1..daysInMonth).map { LocalDate.of(year, month, it).toString() }
-    }
 
 
 
@@ -87,10 +82,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             emptyList()
         }
     }
-
-
-
-
 
     }
 

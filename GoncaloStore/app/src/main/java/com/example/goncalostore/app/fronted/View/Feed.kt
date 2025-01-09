@@ -43,7 +43,7 @@ fun FeedScreen(navController: NavHostController) {
             .fillMaxSize()
             .background(color = DarkBlue)
     ) {
-        // Draw circles at the top
+
         drawCircles(LightBlue, "Produtos", 35.sp)
 
         if (products.value.isEmpty()) {
@@ -64,8 +64,7 @@ fun FeedScreen(navController: NavHostController) {
                         product = product,
                         modifier = Modifier.padding(horizontal = 8.dp),
                         onAddToCart = { selectedProduct ->
-                            // Call a suspend function in a coroutine
-                            carrinhoViewModel.adicionarProdutoCoroutine(selectedProduct)
+                            carrinhoViewModel.adicionarProduto(selectedProduct)
                         }
                     )
                 }
@@ -91,7 +90,7 @@ fun ProductItem(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            // Nome do produto
+
             Text(
                 text = product.nome,
                 style = MaterialTheme.typography.bodyLarge,
@@ -102,7 +101,7 @@ fun ProductItem(
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            // Descrição do produto
+
             Text(
                 text = product.descricao,
                 style = MaterialTheme.typography.bodyMedium,
@@ -113,7 +112,7 @@ fun ProductItem(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Preço do produto
+
             Text(
                 text = "Preço: R$ ${product.preco}",
                 style = MaterialTheme.typography.bodyMedium,
@@ -124,7 +123,7 @@ fun ProductItem(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Botão para adicionar ao carrinho
+
             Button(
                 onClick = { onAddToCart(product) },
                 colors = ButtonDefaults.buttonColors(containerColor = LightBlue)

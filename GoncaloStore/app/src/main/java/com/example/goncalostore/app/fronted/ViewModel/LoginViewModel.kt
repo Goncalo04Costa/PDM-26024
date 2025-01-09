@@ -27,7 +27,7 @@ class LoginViewModel : ViewModel() {
     private val _isLoginSuccessful = MutableStateFlow(false)
     val isLoginSuccessful: StateFlow<Boolean> = _isLoginSuccessful
 
-    // Guarda o usuário autenticado
+    // Guarda o utilizador autenticado
     private val _currentUser = MutableStateFlow<FirebaseUser?>(null)
     val currentUser: StateFlow<FirebaseUser?> = _currentUser
 

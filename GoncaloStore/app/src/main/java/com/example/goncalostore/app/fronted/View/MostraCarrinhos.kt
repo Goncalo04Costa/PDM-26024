@@ -44,8 +44,8 @@ fun MostraCarrinhosScreen(navController: NavHostController) {
             .fillMaxSize()
             .background(color = DarkBlue)
     ) {
-        // Desenhar círculos no topo
-        drawCircles(LightBlue, "Meus Carrinhos", 35.sp)
+
+        drawCircles(LightBlue, " Carrinhos", 35.sp)
 
         if (carrinhos.value.isEmpty()) {
             CircularProgressIndicator(
@@ -56,7 +56,7 @@ fun MostraCarrinhosScreen(navController: NavHostController) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 80.dp, start = 16.dp, end = 16.dp, bottom = 16.dp), // Ajuste no padding para mover a lista para baixo
+                    .padding(top = 80.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 contentPadding = PaddingValues(vertical = 8.dp)
             ) {

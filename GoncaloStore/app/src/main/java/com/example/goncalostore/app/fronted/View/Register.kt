@@ -62,10 +62,10 @@ fun RegisterUserScreen(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Desenho das formas de fundo (opcional)
+
         drawCircles(LightBlue, "Registar \nUsuário", 25.sp)
 
-        // Conteúdo principal
+
         Column(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -77,7 +77,7 @@ fun RegisterUserScreen(navController: NavController) {
                     .fillMaxWidth(0.8f)
                     .padding(bottom = 16.dp)
             ) {
-                // Nome
+
                 Text(
                     text = "Nome *",
                     color = Color.White,
@@ -91,7 +91,7 @@ fun RegisterUserScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Email
+
                 Text(
                     text = "Email *",
                     color = Color.White,
@@ -105,15 +105,14 @@ fun RegisterUserScreen(navController: NavController) {
                 )
                 Spacer(modifier = Modifier.height(12.dp))
 
-                // Senha
                 Text(
-                    text = "Senha *",
+                    text = "Palavra Passe *",
                     color = Color.White,
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
                 CustomTextField(
-                    placeholder = "Indique a sua senha",
+                    placeholder = "Indique a sua palavra passe",
                     value = password,
                     onValueChange = { password = it }
                 )

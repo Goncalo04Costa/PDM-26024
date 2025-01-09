@@ -136,12 +136,12 @@ fun RegisterProductScreen(navController: NavController) {
                                 onSuccess = { msg ->
                                     Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                                     navController.navigate("listproducts") {
-                                        popUpTo("register_product_screen") { inclusive = true }
+                                        popUpTo("addproduct") { inclusive = true }
                                     }
                                 }
                             )
                         } catch (e: Exception) {
-                            Log.e("RegisterProductScreen", "Erro ao registrar o produto", e)
+                            Log.e("RegisterProductScreen", "Erro ao registar  produto", e)
                         }
                     }
                 }

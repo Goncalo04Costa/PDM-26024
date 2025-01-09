@@ -37,7 +37,7 @@ Column(modifier = Modifier.padding(16.dp)) {
             Text(text = noticiasDetalhadas!!.abstract, style = MaterialTheme.typography.bodySmall)
             Text(text = noticiasDetalhadas!!.lead_paragraph, style = MaterialTheme.typography.bodyLarge)
         } else {
-            // Exibe uma mensagem  caso os dados ainda não tenham sido carregados
+
             Text(text = "A Carregar Detalhes...", style = MaterialTheme.typography.bodyMedium)
         }
     }

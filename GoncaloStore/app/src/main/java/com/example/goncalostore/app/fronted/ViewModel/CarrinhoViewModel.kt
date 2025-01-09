@@ -139,7 +139,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
         val userEmail = currentUser?.email
 
         if (userEmail == null) {
-            Log.e("CarrinhoViewModel", "Usuário não autenticado.")
+            Log.e("CarrinhoViewModel", "Utilizador não autenticado.")
             return
         }
 
@@ -168,7 +168,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun adicionarProdutoCoroutine(produto: Produto) {
+    fun adicionarProduto(produto: Produto) {
         viewModelScope.launch {
             try {
                 if (_carrinhoAtivo.value == null) {
@@ -176,7 +176,7 @@ class CarrinhoViewModel(application: Application) : AndroidViewModel(application
                 }
                 adicionarProdutoAoCarrinhoAtivo(produto)
             } catch (e: Exception) {
-                Log.e("CarrinhoViewModel", "Erro na coroutine de adicionar produto: ${e.message}")
+                Log.e("CarrinhoViewModel", "Erro  adicionar produto: ${e.message}")
             }
         }
     }
